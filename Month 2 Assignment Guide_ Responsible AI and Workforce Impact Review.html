@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Month 2 Assignment Guide: Responsible AI and Workforce Impact Review</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#1F3864;--teal:#2E75B6;--light:#EAF2FB;--bg:#F6F8FB;--card:#fff;--text:#1d2433;--muted:#5b6578;--line:#E1E6EE;--green:#2E8B57;--amber:#D98E04;--red:#C0392B}
+*{box-sizing:border-box}
+body{margin:0;font-family:Inter,Arial,sans-serif;background:var(--bg);color:var(--text);font-size:15px;line-height:1.55}
+header{background:var(--navy);color:#fff;padding:22px 28px}
+header .kicker{font-size:12px;letter-spacing:.06em;text-transform:uppercase;opacity:.75}
+header h1{margin:4px 0 2px;font-size:24px}
+header p{margin:0;opacity:.85}
+.progress-wrap{margin-top:14px;display:flex;align-items:center;gap:12px;max-width:520px}
+.bar{flex:1;height:8px;background:rgba(255,255,255,.2);border-radius:99px;overflow:hidden}
+.bar span{display:block;height:100%;background:#7FC4FF;width:0;transition:width .3s}
+.progress-wrap small{white-space:nowrap;opacity:.9}
+.layout{display:grid;grid-template-columns:250px 1fr;min-height:calc(100vh - 120px)}
+nav{background:#fff;border-right:1px solid var(--line);padding:16px 10px;position:sticky;top:0;align-self:start;max-height:100vh;overflow:auto}
+nav .grp{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin:14px 10px 6px}
+nav button{display:flex;justify-content:space-between;align-items:center;width:100%;text-align:left;background:none;border:0;padding:8px 10px;border-radius:8px;font:inherit;font-size:14px;color:var(--text);cursor:pointer}
+nav button:hover{background:var(--bg)}
+nav button.active{background:var(--light);color:var(--navy);font-weight:600}
+nav .tick{color:var(--green);font-weight:700}
+main{padding:28px;max-width:960px}
+.view{display:none}.view.active{display:block}
+h2{color:var(--navy);margin:0 0 6px;font-size:22px}
+h3{color:var(--teal);margin:22px 0 8px;font-size:16px}
+.lead{color:var(--muted);margin-top:0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:14px 0}
+.tip{background:var(--light);border-left:4px solid var(--teal);border-radius:8px;padding:12px 16px;margin:14px 0}
+.tip b{color:var(--navy)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 10px}
+.chip{background:var(--navy);color:#fff;border-radius:99px;padding:2px 10px;font-size:12px;font-weight:600;cursor:pointer;border:0;font-family:inherit}
+.chip.s{background:var(--teal)}.chip.b{background:#6B5B95}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px}
+.tile{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px;cursor:pointer;transition:.15s}
+.tile:hover{border-color:var(--teal);box-shadow:0 2px 8px rgba(46,117,182,.12)}
+.tile .n{font-size:12px;color:var(--muted)}
+.tile .t{font-weight:600;color:var(--navy);margin:2px 0 6px}
+.tile .st{font-size:12px;color:var(--muted)}
+.tile.done{border-color:var(--green)}.tile.done .st{color:var(--green);font-weight:600}
+ul.check{list-style:none;padding:0;margin:6px 0}
+ul.check li{display:flex;gap:10px;align-items:flex-start;padding:7px 0;border-bottom:1px dashed var(--line)}
+ul.check li:last-child{border-bottom:0}
+ul.check input{margin-top:4px;width:17px;height:17px;accent-color:var(--teal);flex-shrink:0}
+ul.check label{cursor:pointer}
+ul.check input:checked+label{color:var(--muted);text-decoration:line-through}
+ul.plain{margin:6px 0;padding-left:20px}
+table{width:100%;border-collapse:collapse;font-size:14px;background:#fff}
+th{background:var(--navy);color:#fff;text-align:left;padding:9px 10px;font-weight:600}
+td{border-bottom:1px solid var(--line);padding:9px 10px;vertical-align:top}
+.peel{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:12px 0}
+.peel button{background:#fff;border:2px solid var(--line);border-radius:12px;padding:14px 8px;font:inherit;cursor:pointer;text-align:center}
+.peel button .L{font-size:26px;font-weight:700;color:var(--teal);display:block}
+.peel button.on{border-color:var(--teal);background:var(--light)}
+#peelOut{min-height:60px}
+.ex span{padding:1px 3px;border-radius:4px;transition:.2s}
+.ex span.hl{background:#FFE9A8}
+.rag{display:inline-block;padding:2px 10px;border-radius:99px;color:#fff;font-weight:600;font-size:12px}
+.rag.G{background:var(--green)}.rag.A{background:var(--amber)}.rag.R{background:var(--red)}
+.form{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.form label{font-size:13px;color:var(--muted);display:block;margin-bottom:3px}
+.form input,.form select,.form textarea{width:100%;padding:8px 10px;border:1px solid var(--line);border-radius:8px;font:inherit;font-size:14px}
+.form .full{grid-column:1/-1}
+.btn{background:var(--teal);color:#fff;border:0;border-radius:8px;padding:9px 16px;font:inherit;font-weight:600;cursor:pointer}
+.btn.ghost{background:#fff;color:var(--teal);border:1px solid var(--teal)}
+.btn.sm{padding:4px 10px;font-size:12px}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:12px}
+.warn{color:var(--red);font-size:13px;margin-top:6px}
+.score-matrix{display:grid;grid-template-columns:70px repeat(3,1fr);gap:4px;max-width:420px;font-size:13px;text-align:center}
+.score-matrix div{padding:8px;border-radius:6px}
+.score-matrix .h{background:none;color:var(--muted);font-weight:600}
+.done-btn{margin-top:16px}
+.toast{position:fixed;bottom:20px;right:20px;background:var(--navy);color:#fff;padding:10px 16px;border-radius:8px;opacity:0;transition:.3s;pointer-events:none}
+.toast.show{opacity:1}
+@media(max-width:780px){.layout{grid-template-columns:1fr}nav{position:static;max-height:none;border-right:0;border-bottom:1px solid var(--line);display:flex;overflow-x:auto;padding:8px}nav .grp{display:none}nav button{white-space:nowrap;width:auto}main{padding:18px}.peel{grid-template-columns:repeat(2,1fr)}.form{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+  <div class="kicker">Level 4 AI and Automation Practitioner (ST1512) · Month 2</div>
+  <h1>How to Write Your Month 2 Assignment</h1>
+  <p>Responsible AI and Workforce Impact Review</p>
+  <div class="progress-wrap"><div class="bar"><span id="progBar"></span></div><small id="progTxt">0% complete</small></div>
+</header>
+<div class="layout">
+<nav id="nav"></nav>
+<main id="main"></main>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+const KSB = {
+ K1:"Explain the role of organisational leadership in responsible AI adoption, including values, policy, strategy, reputational risk, morale and sustainability.",
+ K2:"Explain legal, regulatory and ethical frameworks relevant to AI and automation, including employment rights, equality, GDPR, fairness, transparency and accountability.",
+ K3:"Explain the potential social and economic impact of AI and automation on different roles, particularly for non-technical staff, including change management principles.",
+ K6:"Explain the importance of designing AI and automation systems that augment rather than replace human work, where feasible.",
+ K10:"Explain sources of error and algorithmic bias, including dataset choice, methodology, fairness metrics and mitigation approaches.",
+ K26:"Explain the benefits of well-being and safe working practices.",
+ K28:"Explain algorithmic impact assessment and workforce equality monitoring, including how to identify and mitigate disproportionate impacts.",
+ S2:"Follow ethical, responsible and safe working practices, respecting confidentiality and sensitive organisational matters.",
+ S13:"Support responsible implementation of AI and automation solutions aligned to organisational values, policies and user needs.",
+ S23:"Support others to use AI and automation safely and appropriately within organisational guidance.",
+ "B1, B2, B5":"Demonstrate accountability, responsibility, ethical awareness and safe professional practice."
+};
+const SECTIONS = [
+ {id:"s1",title:"Organisation and opportunity summary",ksb:[],
+  intro:"Briefly introduce your organisation and the AI or automation idea you are reviewing. Link back to Month 1 but do not repeat the whole report. Start by stating which theme you have chosen.",
+  include:["State your chosen theme (A: HR, B: Recruitment, C: Leadership and Operations, D: Training and Learning Support)","Describe the workplace process or issue","Describe the AI or automation idea","Say who will use it and who will be affected","Explain why it could improve productivity or consistency","Explain why it needs a responsible AI review before going further"],
+  marker:[],tips:[]},
+ {id:"s2",title:"Leadership responsibility and organisational values",ksb:["K1","S13"],
+  intro:"Explain the role of leadership in responsible AI adoption. K1 lists specific values and each one is ticked off individually, so make sure every one is covered.",
+  include:["How leaders set expectations for safe AI use","Why AI must align with organisational values, policy and strategy","Staff trust, morale and long-term sustainability","The reputational risk of using AI irresponsibly","Who should approve, monitor or challenge the AI use"],
+  marker:["K1: have you covered policy, strategy, reputational risk, morale and sustainability?","S13: have you shown how the idea aligns with your organisation's actual values and AI policy?"],
+  tips:["Refer directly to your organisation's AI policy. If the values say you must be fair to the client, find where that appears in the policy, refer to it, take a screenshot and put it in your report or appendix. Doing this hits K1 and S13 at the same time."]},
+ {id:"s3",title:"Legal, regulatory and ethical considerations",ksb:["K2","S2","S13"],
+  intro:"Review the legal, regulatory and ethical issues for your idea. You do not have to cover every item in the brief, but cover at least three in depth. Do not just list the rules: explain how each one applies to your idea.",
+  include:["Choose at least three from: GDPR and data protection, confidentiality, employment rights, equality and fairness, transparency, accountability, professional standards, and whether people should be told AI is being used","For each one, explain how it applies to your specific idea"],
+  marker:["K2: a clear explanation of each framework you have chosen (knowledge)","S2: evidence you follow ethical, safe and confidential working practices and your organisation's policies","S13: how you would implement the idea so it meets your AI policy and security policy"],
+  tips:["Link in your organisation's information security policy as well as the AI policy, and put extracts of both in the appendix. Show how you would implement the idea so it ticks the boxes of both policies."]},
+ {id:"s4",title:"Workforce impact and wellbeing",ksb:["K3","K6","K26","S23","B1, B2, B5"],
+  intro:"Evaluate how the idea could affect people. This section hits several KSBs, and they link together nicely.",
+  include:["How staff or users may feel about it, including anxiety, mistrust or resistance","Effects on workload, role security and confidence","The principle that AI should augment rather than replace human work","How non-technical users will be supported","How wellbeing and safe working practices will be protected"],
+  marker:["K3: the social impact (for example, a non-technical colleague feeling worried) and the economic impact (for example, working more efficiently) on non-technical staff, plus named change management principles","K6: why the system should help rather than hinder, and support people rather than replace them","K26: the benefits of wellbeing and safe working practices","S23: evidence that you support others to use AI safely within organisational guidance"],
+  tips:["Change management principles: do some quick research on recognised principles or models (for example Lewin, Kotter or ADKAR) and apply one to how you would introduce the idea to non-technical staff.","Easy win for S23: use your organisation's approved AI tool to create a short leaflet or process map showing how to support users who are not confident with it. It takes a few minutes. Include it as evidence in the appendix."]},
+ {id:"s5",title:"Error, bias and fairness risks",ksb:["K10"],
+  intro:"Explain the possible sources of error and bias in your proposed AI use. You do not need to cover them all. Choose three that suit your idea.",
+  include:["Choose three from: data bias, prompt bias, design bias, process bias, human bias, incomplete or outdated information, hallucination or inaccurate outputs, and users treating outputs as objective","For each, explain how it would appear in your prompts and pathway","Give a mitigation approach for each"],
+  marker:["An explanation of what each risk is, and how it would actually show up in your prompts and your pathway","Mitigation approaches for each risk"],
+  tips:["Do not stop at the definition. The marks come from explaining how the risk would raise its head in your own prompts and process."]},
+ {id:"s6",title:"Algorithmic impact and workforce equality monitoring",ksb:["K28"],
+  intro:"Review whether your idea could have a disproportionate impact on different groups. Pick three groups to focus on.",
+  include:["Who could be affected and whether any group could be disadvantaged (non-technical users are a strong choice; also consider protected characteristics, accessibility needs and different working patterns)","How you would monitor outcomes","What evidence would show whether the AI use is fair or unfair","What action you would take if an unfair impact is identified"],
+  marker:["K28: a clear explanation of algorithmic impact assessment and how you would identify and mitigate disproportionate impact"],tips:[]},
+ {id:"s7",title:"RAG-rated risk register",ksb:["S2","S13","S23"],
+  intro:"Complete a risk register for your idea, scoring Likelihood (1 to 3) multiplied by Severity (1 to 3). Use the Risk Register Builder in the menu to practise and check your scoring.",
+  include:["Columns: Risk, Cause, Impact, Likelihood, Severity, RAG rating, Mitigation, Owner","Cover the risks you identified in sections 3 to 6"],
+  marker:["Specific mitigations, not vague ones. \"Check it carefully\" will not pass. Use controls such as approved tools only, removing personal data, bias testing, human review, checking outputs against policy, documenting decisions, informing users and escalating high-risk use."],
+  tips:["You can build the register in Excel and attach it as evidence. Still take a screenshot of it, place it in the report and put it in the appendix. If you want to go further, ask your AI tool to turn it into a dashboard."]},
+ {id:"s8",title:"Recommendation and professional judgement",ksb:["S2","S13","S23"],
+  intro:"Make one clear recommendation and justify it. This is where you show Level 4 judgement.",
+  include:["Choose one: Proceed, Proceed with safeguards, Pause for further review, or Reject or redesign","Justify it using evidence from your report and your risk register"],
+  marker:["A reasoned professional decision, not just a description of the risks"],tips:[]},
+ {id:"s9",title:"Evidence appendix and references",ksb:["S2","S13","S23","B1, B2, B5"],
+  intro:"Your appendix is where the S and B criteria are proven. Refer to each item from the main report (for example, \"see Appendix C\"). Do not include any confidential, personal or sensitive information.",
+  include:["Screenshot of your completed RAG register (plus the attached Excel file)","Extracts or screenshots from your organisation's AI policy and information security policy","Screenshots of safe exploration using dummy data, and prompts using non-confidential information","Your S23 leaflet or process map for supporting non-technical users","Evidence of checking AI output against reliable sources, and a short reflection on safe practice","A reference list of every policy, article, piece of legislation or guidance you have used"],
+  marker:[],tips:[]}
+];
+const KSB_MAP = [
+ ["K1","2","Policy, strategy, reputational risk, morale and sustainability all explained"],
+ ["S13","2, 3, 7","Idea aligned to your AI policy and values, with policy screenshots"],
+ ["K2","3","At least three legal, regulatory or ethical frameworks explained and applied"],
+ ["S2","3, 7","Safe, ethical, confidential practice shown; security policy linked"],
+ ["K3","4","Social and economic impact on non-technical staff; change management principles named"],
+ ["K6","4","Augment rather than replace human work explained"],
+ ["K26","4","Benefits of wellbeing and safe working practices explained"],
+ ["S23","4, 7","Leaflet or process map supporting non-technical users"],
+ ["K10","5","Three sources of error or bias, shown in your prompts and pathway"],
+ ["K28","6","Three groups reviewed, with monitoring, evidence and actions"],
+ ["B1, B2, B5","Throughout","Accountability, ethical awareness and safe practice shown in screenshots"]
+];
+const SUBMIT = ["I have used PEEL paragraphs and kept bullet points to a minimum","I have covered every element of each KSB, not just the headline","I have linked everything back to my own organisation and idea","Every screenshot is referred to in the report and placed in the appendix","My risk register mitigations are specific","I have made one clear recommendation and justified it","I have added a reference list and removed any confidential or personal data"];
+
+/* storage */
+let store = {};
+try{ store = JSON.parse(localStorage.getItem("m2guide")||"{}"); }catch(e){}
+function save(){ try{ localStorage.setItem("m2guide", JSON.stringify(store)); }catch(e){} updateProgress(); }
+store.checks = store.checks||{}; store.risks = store.risks||[];
+
+const esc = s => String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const chip = k => `<button class="chip ${k[0]==='S'?'s':k[0]==='B'?'b':''}" data-ksb="${k}" title="${esc(KSB[k])}">${k}</button>`;
+function checklist(prefix, items){
+  return `<ul class="check">${items.map((x,i)=>{const id=prefix+"-"+i;return `<li><input type="checkbox" id="${id}" data-c="${id}" ${store.checks[id]?"checked":""}><label for="${id}">${esc(x)}</label></li>`}).join("")}</ul>`;
+}
+function sectionDone(s){ return s.include.every((_,i)=>store.checks[s.id+"-"+i]); }
+
+/* views */
+const VIEWS = [];
+VIEWS.push({id:"overview",grp:"Start here",label:"Overview",render:()=>`
+ <h2>Overview</h2>
+ <p class="lead">Use this guide alongside the assessment brief. Work through each section, tick off what you have written, and use the checklists before you submit. Your ticks are saved in this browser only.</p>
+ <div class="card"><b>The task in one line:</b> write a professional report reviewing one AI or automation idea from a responsible AI perspective, complete a RAG-rated risk register, and make a clear recommendation.</div>
+ <h3>Report sections</h3>
+ <div class="grid">${SECTIONS.map((s,i)=>`<div class="tile ${sectionDone(s)?"done":""}" data-go="${s.id}"><div class="n">${i<8?"Section "+(i+1):"Appendix"}</div><div class="t">${esc(s.title)}</div><div class="chips">${s.ksb.map(chip).join("")}</div><div class="st">${sectionDone(s)?"✓ Complete":s.include.filter((_,j)=>store.checks[s.id+"-"+j]).length+" of "+s.include.length+" ticked"}</div></div>`).join("")}</div>
+ <div class="tip"><b>It looks big, but it links together.</b> Many KSBs overlap, so one well-written section with good screenshots can hit several criteria at once. Tap any KSB badge to see what it means.</div>`});
+VIEWS.push({id:"style",grp:"Start here",label:"Writing style (PEEL)",render:()=>`
+ <h2>Writing style for a Level 4 report</h2>
+ <p class="lead">At Level 4 your work should follow a higher education report format. That means fewer bullet points and more well-structured paragraphs that describe a situation clearly and succinctly. Bullet points are fine for short lists, but explanations, arguments and evaluations should be written as prose.</p>
+ <h3>Use PEEL for every paragraph</h3><p>Tap each letter to see what it means and where it appears in the example.</p>
+ <div class="peel">${[["P","Point"],["E","Evidence"],["E","Explain"],["L","Link"]].map((x,i)=>`<button data-peel="${i}"><span class="L">${x[0]}</span>${x[1]}</button>`).join("")}</div>
+ <div class="card" id="peelOut"><i>Select a letter above.</i></div>
+ <h3>Example paragraph</h3>
+ <div class="card ex" id="peelEx"><span data-p="0">Using AI to answer employee HR queries creates a data protection risk because staff may type personal information into the tool.</span> <span data-p="1">Under UK GDPR, personal data must be processed lawfully and kept secure (ICO, 2024), and our AI policy states that no personal data may be entered into public AI tools (see Appendix B).</span> <span data-p="2">This means the tool must be set up so that users cannot paste employee records into it, otherwise the organisation could breach the law and lose staff trust.</span> <span data-p="3">For this reason, my proposed HR assistant will only use approved, anonymised policy documents and will include a warning message reminding users not to enter personal details.</span></div>
+ <p style="color:var(--muted);font-size:13px"><i>The example is illustrative. Use your own organisation, policy wording and sources.</i></p>`});
+VIEWS.push({id:"marking",grp:"Start here",label:"How it is marked",render:()=>`
+ <h2>How the report is marked</h2>
+ <p class="lead">Each KSB is checked and its individual elements are ticked off one by one. You will see this approach in your Month 1 feedback. Knowing it means you know exactly what the marker is looking for.</p>
+ <div class="grid">
+  <div class="card"><span class="chip">K</span><h3 style="margin-top:8px">Knowledge</h3>You explaining the situation. The marker needs to see that you understand each element named in the KSB.</div>
+  <div class="card"><span class="chip s">S</span><h3 style="margin-top:8px">Skills</h3>Evidence that you are actually doing it: screenshots, policy extracts and work you have produced, referred to in the report and placed in the appendix.</div>
+  <div class="card"><span class="chip b">B</span><h3 style="margin-top:8px">Behaviours</h3>Shown through your screenshots and the way you work safely and professionally throughout.</div>
+ </div>
+ <h3>All KSBs in this assignment</h3>
+ <table><tr><th style="width:110px">KSB</th><th>Requirement</th></tr>${Object.entries(KSB).map(([k,v])=>`<tr><td>${chip(k)}</td><td>${esc(v)}</td></tr>`).join("")}</table>`});
+SECTIONS.forEach((s,i)=>VIEWS.push({id:s.id,grp:"Report sections",label:(i<8?(i+1)+". ":"")+s.title,section:s,render:()=>`
+ <h2>${i<8?(i+1)+". ":""}${esc(s.title)}</h2>
+ ${s.ksb.length?`<div class="chips">${s.ksb.map(chip).join("")}</div>`:""}
+ <p class="lead">${esc(s.intro)}</p>
+ <div class="card"><b>What to include</b> <span style="color:var(--muted);font-size:13px">(tick as you write each part)</span>${checklist(s.id,s.include)}</div>
+ ${s.marker.length?`<div class="card"><b>What the marker looks for</b><ul class="plain">${s.marker.map(m=>`<li>${esc(m)}</li>`).join("")}</ul></div>`:""}
+ ${s.tips.map(t=>`<div class="tip"><b>Trainer tip</b><br>${esc(t)}</div>`).join("")}
+ ${i<SECTIONS.length-1?`<button class="btn ghost done-btn" data-go="${SECTIONS[i+1].id}">Next: ${esc(SECTIONS[i+1].title)} →</button>`:`<button class="btn ghost done-btn" data-go="ksb">Next: KSB checklist →</button>`}`}));
+VIEWS.push({id:"risk",grp:"Tools",label:"Risk register builder",render:renderRisk});
+VIEWS.push({id:"ksb",grp:"Tools",label:"KSB checklist",render:()=>`
+ <h2>KSB quick-reference checklist</h2><p class="lead">Tick each KSB once you are confident your report covers it.</p>
+ <table><tr><th style="width:44px"></th><th style="width:110px">KSB</th><th style="width:100px">Section</th><th>Evidence the marker needs to see</th></tr>
+ ${KSB_MAP.map((r,i)=>{const id="ksb-"+i;return `<tr><td><input type="checkbox" id="${id}" data-c="${id}" ${store.checks[id]?"checked":""} style="width:17px;height:17px;accent-color:var(--teal)"></td><td>${chip(r[0])}</td><td>${r[1]}</td><td><label for="${id}">${esc(r[2])}</label></td></tr>`}).join("")}</table>`});
+VIEWS.push({id:"submit",grp:"Tools",label:"Before you submit",render:()=>`
+ <h2>Before you submit</h2><p class="lead">Run through this final check.</p>
+ <div class="card">${checklist("sub",SUBMIT)}</div>
+ <h3>Keeping on track</h3>
+ <ul class="plain"><li><b>Hot topics:</b> aim to complete at least one hot topic before each progress review. Your trainer will ask how many you have completed.</li><li><b>Off-the-job hours:</b> log your off-the-job learning regularly so your record stays up to date.</li><li><b>One-to-ones:</b> bring your draft and any questions to your next one-to-one with your trainer.</li><li><b>Questions:</b> contact your trainer by email at any time if you get stuck.</li></ul>
+ <div class="row"><button class="btn ghost" id="resetAll">Reset all my ticks</button></div>`});
+
+/* risk register */
+function ragOf(n){ return n<=2?["G","Green","Low risk: monitor through normal controls."]:n<=4?["A","Amber","Medium risk: add safeguards before use."]:["R","Red","High risk: do not proceed without review, stronger controls or a different approach."]; }
+const VAGUE = /\b(check (it )?carefully|be careful|monitor it|keep an eye|double check|be aware)\b/i;
+function renderRisk(){
+ const matrix = `<div class="score-matrix"><div class="h">L \\ S</div><div class="h">1</div><div class="h">2</div><div class="h">3</div>${[3,2,1].map(l=>`<div class="h">${l}</div>`+[1,2,3].map(s=>{const r=ragOf(l*s);return `<div style="background:var(--${r[0]==="G"?"green":r[0]==="A"?"amber":"red"});color:#fff;font-weight:600">${l*s}</div>`}).join("")).join("")}</div>`;
+ return `<h2>Risk register builder</h2>
+ <p class="lead">Practise your RAG register here. The score and rating are worked out for you, and vague mitigations are flagged. When you are happy, copy the table into Excel or Word.</p>
+ <div class="card"><b>Scoring:</b> Likelihood (1 to 3) × Severity (1 to 3). <span class="rag G">1 to 2 Green</span> <span class="rag A">3 to 4 Amber</span> <span class="rag R">6 to 9 Red</span><div style="margin-top:12px">${matrix}</div></div>
+ <div class="card"><form id="riskForm" class="form">
+  <div class="full"><label>Risk</label><input name="risk" required placeholder="e.g. Staff enter personal data into the AI tool"></div>
+  <div><label>Cause</label><input name="cause" placeholder="What could cause it?"></div>
+  <div><label>Impact</label><input name="impact" placeholder="What would happen?"></div>
+  <div><label>Likelihood (1 to 3)</label><select name="l"><option>1</option><option selected>2</option><option>3</option></select></div>
+  <div><label>Severity (1 to 3)</label><select name="s"><option>1</option><option selected>2</option><option>3</option></select></div>
+  <div class="full"><label>Mitigation (be specific)</label><textarea name="mit" rows="2" placeholder="e.g. Use the approved enterprise tool only; add a warning banner; remove personal data before prompts"></textarea><div class="warn" id="vagueWarn" style="display:none">This mitigation looks vague. Name a specific control, such as human review, approved tools only or removing personal data.</div></div>
+  <div><label>Owner</label><input name="owner" placeholder="Role, e.g. HR Manager"></div>
+  <div style="align-self:end"><span id="livePreview"></span></div>
+  <div class="full row" style="margin-top:0"><button class="btn" type="submit">Add risk</button></div>
+ </form></div>
+ <div id="riskTable"></div>`;
+}
+function drawRiskTable(){
+ const el=document.getElementById("riskTable"); if(!el) return;
+ if(!store.risks.length){ el.innerHTML=`<p style="color:var(--muted)">No risks added yet.</p>`; return; }
+ el.innerHTML=`<div style="overflow-x:auto"><table><tr><th>Risk</th><th>Cause</th><th>Impact</th><th>L</th><th>S</th><th>Score</th><th>RAG</th><th>Mitigation</th><th>Owner</th><th></th></tr>${store.risks.map((r,i)=>{const n=r.l*r.s,g=ragOf(n);return `<tr><td>${esc(r.risk)}</td><td>${esc(r.cause)}</td><td>${esc(r.impact)}</td><td>${r.l}</td><td>${r.s}</td><td>${n}</td><td><span class="rag ${g[0]}">${g[1]}</span></td><td>${esc(r.mit)}</td><td>${esc(r.owner)}</td><td><button class="btn ghost sm" data-del="${i}">Remove</button></td></tr>`}).join("")}</table></div>
+ <div class="row"><button class="btn" id="copyRisk">Copy table for Excel or Word</button><button class="btn ghost" id="clearRisk">Clear all</button></div>`;
+}
+
+/* nav + routing */
+function buildNav(){
+ let html="",grp="";
+ VIEWS.forEach(v=>{ if(v.grp!==grp){grp=v.grp;html+=`<div class="grp">${grp}</div>`;} html+=`<button data-go="${v.id}" id="nav-${v.id}"><span>${esc(v.label)}</span>${v.section&&sectionDone(v.section)?'<span class="tick">✓</span>':""}</button>`; });
+ document.getElementById("nav").innerHTML=html;
+}
+let current="overview";
+function show(id){
+ const v=VIEWS.find(x=>x.id===id)||VIEWS[0]; current=v.id;
+ document.getElementById("main").innerHTML=`<section class="view active">${v.render()}</section>`;
+ buildNav(); document.getElementById("nav-"+v.id).classList.add("active");
+ if(v.id==="risk") drawRiskTable();
+ if(location.hash!=="#"+v.id) history.replaceState(null,"","#"+v.id);
+ window.scrollTo(0,0);
+}
+function updateProgress(){
+ let total=0,done=0;
+ SECTIONS.forEach(s=>s.include.forEach((_,i)=>{total++; if(store.checks[s.id+"-"+i]) done++;}));
+ KSB_MAP.forEach((_,i)=>{total++; if(store.checks["ksb-"+i]) done++;});
+ SUBMIT.forEach((_,i)=>{total++; if(store.checks["sub-"+i]) done++;});
+ const pct=Math.round(done/total*100);
+ document.getElementById("progBar").style.width=pct+"%";
+ document.getElementById("progTxt").textContent=pct+"% complete";
+}
+function toast(m){const t=document.getElementById("toast");t.textContent=m;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),2200);}
+
+document.addEventListener("click",e=>{
+ const go=e.target.closest("[data-go]"); if(go){ show(go.dataset.go); return; }
+ const c=e.target.closest("[data-ksb]"); if(c){ toast(c.dataset.ksb+": "+KSB[c.dataset.ksb]); e.stopPropagation(); return; }
+ const p=e.target.closest("[data-peel]"); if(p){
+  const i=+p.dataset.peel, D=[["Point","State the point you are making. What is the issue, risk or idea?"],["Evidence","Back it up. Do some quick research and find a reliable reference point (legislation, ICO guidance, an article, your organisation's AI policy). Add it to your reference list."],["Explain","Explain what the evidence means. Where the brief asks you to evaluate, give your own view of the process or situation."],["Link","Link it back to your scenario: your organisation, your chosen theme and your AI or automation idea."]];
+  document.querySelectorAll("[data-peel]").forEach(b=>b.classList.toggle("on",b===p));
+  document.getElementById("peelOut").innerHTML=`<b style="color:var(--navy)">${D[i][0]}</b><br>${D[i][1]}`;
+  document.querySelectorAll("#peelEx span").forEach(s=>s.classList.toggle("hl",+s.dataset.p===i)); return; }
+ const d=e.target.closest("[data-del]"); if(d){ store.risks.splice(+d.dataset.del,1); save(); drawRiskTable(); return; }
+ if(e.target.id==="clearRisk"){ store.risks=[]; save(); drawRiskTable(); return; }
+ if(e.target.id==="copyRisk"){
+  const rows=[["Risk","Cause","Impact","Likelihood","Severity","Score","RAG","Mitigation","Owner"]].concat(store.risks.map(r=>[r.risk,r.cause,r.impact,r.l,r.s,r.l*r.s,ragOf(r.l*r.s)[1],r.mit,r.owner]));
+  const tsv=rows.map(r=>r.map(x=>String(x).replace(/\t|\n/g," ")).join("\t")).join("\n");
+  (navigator.clipboard?navigator.clipboard.writeText(tsv):Promise.reject()).then(()=>toast("Copied. Paste into Excel or Word.")).catch(()=>toast("Copy was blocked. Select the table and copy it manually.")); return; }
+ if(e.target.id==="resetAll"){ store.checks={}; save(); show(current); toast("Ticks reset"); }
+});
+document.addEventListener("change",e=>{
+ const c=e.target.dataset&&e.target.dataset.c; if(c){ store.checks[c]=e.target.checked; save(); buildNav(); const a=document.getElementById("nav-"+current); if(a) a.classList.add("active"); }
+});
+document.addEventListener("input",e=>{
+ const f=e.target.form; if(!f||f.id!=="riskForm") return;
+ const n=f.l.value*f.s.value,g=ragOf(n);
+ document.getElementById("livePreview").innerHTML=`Score ${n} <span class="rag ${g[0]}">${g[1]}</span>`;
+ document.getElementById("vagueWarn").style.display=VAGUE.test(f.mit.value)?"block":"none";
+});
+document.addEventListener("submit",e=>{
+ if(e.target.id!=="riskForm") return; e.preventDefault(); const f=e.target;
+ store.risks.push({risk:f.risk.value,cause:f.cause.value,impact:f.impact.value,l:+f.l.value,s:+f.s.value,mit:f.mit.value,owner:f.owner.value});
+ save(); f.reset(); document.getElementById("livePreview").innerHTML=""; drawRiskTable(); toast("Risk added");
+});
+window.addEventListener("hashchange",()=>{const h=location.hash.slice(1); if(h&&h!==current) show(h);});
+show(location.hash.slice(1)||"overview"); updateProgress();
+</script>
+</body>
+</html>
