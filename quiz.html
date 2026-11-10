@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Month 2 KSB Knowledge Check: EPA-Style Quiz</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#1F3864;--teal:#2E75B6;--light:#EAF2FB;--bg:#F6F8FB;--line:#E1E6EE;--text:#1d2433;--muted:#5b6578;--green:#2E8B57;--amber:#D98E04;--red:#C0392B}
+*{box-sizing:border-box}
+body{margin:0;font-family:Inter,Arial,sans-serif;background:var(--bg);color:var(--text);font-size:15px;line-height:1.55}
+header{background:var(--navy);color:#fff;padding:20px 24px}
+header .k{font-size:12px;letter-spacing:.06em;text-transform:uppercase;opacity:.75}
+header h1{margin:4px 0 2px;font-size:22px}
+header p{margin:0;opacity:.85}
+main{max-width:760px;margin:0 auto;padding:24px 18px 60px}
+.card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px;margin:14px 0}
+h2{color:var(--navy);margin:0 0 8px}
+.muted{color:var(--muted)}
+.btn{background:var(--teal);color:#fff;border:0;border-radius:9px;padding:11px 20px;font:inherit;font-weight:600;cursor:pointer}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+a.btn{text-decoration:none;display:inline-block}
+.btn.ghost{background:#fff;color:var(--teal);border:1px solid var(--teal)}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:16px}
+.modes{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin-top:12px}
+.mode{border:2px solid var(--line);border-radius:12px;padding:14px;cursor:pointer;background:#fff;text-align:left;font:inherit}
+.mode.on{border-color:var(--teal);background:var(--light)}
+.mode b{display:block;color:var(--navy)}
+.topbar{display:flex;justify-content:space-between;align-items:center;font-size:13px;color:var(--muted)}
+.bar{height:6px;background:var(--line);border-radius:99px;overflow:hidden;margin:8px 0 4px}
+.bar span{display:block;height:100%;background:var(--teal);transition:width .3s}
+.tag{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:2px 8px;border-radius:99px;background:var(--light);color:var(--navy);margin-right:6px}
+.tag.ksb{background:var(--navy);color:#fff}
+.scenario{background:var(--light);border-left:4px solid var(--teal);border-radius:8px;padding:12px 14px;margin:12px 0}
+.q{font-weight:600;font-size:17px;margin:12px 0}
+.opts{display:grid;gap:8px}
+.opt{text-align:left;border:2px solid var(--line);background:#fff;border-radius:10px;padding:12px 14px;font:inherit;cursor:pointer;display:flex;gap:10px;align-items:flex-start}
+.opt:hover:not(:disabled){border-color:var(--teal)}
+.opt .l{font-weight:700;color:var(--teal);min-width:18px}
+.opt.sel{border-color:var(--teal);background:var(--light)}
+.opt.right{border-color:var(--green);background:#E8F5EE}
+.opt.wrong{border-color:var(--red);background:#FBEAEA}
+.opt:disabled{cursor:default}
+.opt.rag{justify-content:center;font-weight:700;color:#fff;border:0}
+.rags{grid-template-columns:repeat(3,1fr)}
+.feedback{margin-top:14px;border-radius:10px;padding:12px 14px;display:none}
+.feedback.ok{display:block;background:#E8F5EE;border:1px solid #BFE3CF}
+.feedback.no{display:block;background:#FBEAEA;border:1px solid #F0C4C0}
+.feedback b{display:block;margin-bottom:4px}
+.score{font-size:44px;font-weight:700;color:var(--navy);margin:4px 0}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th{text-align:left;background:var(--navy);color:#fff;padding:8px 10px}
+td{padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:middle}
+.pill{display:inline-block;padding:2px 10px;border-radius:99px;color:#fff;font-weight:600;font-size:12px}
+.mini{height:8px;background:var(--line);border-radius:99px;overflow:hidden;min-width:80px}
+.mini span{display:block;height:100%}
+.review{font-size:14px;border-bottom:1px dashed var(--line);padding:10px 0}
+.review:last-child{border-bottom:0}
+a{color:var(--teal)}
+@media(max-width:560px){.rags{grid-template-columns:1fr}.score{font-size:36px}}
+</style>
+</head>
+<body>
+<header>
+ <div class="k">Level 4 AI and Automation Practitioner (ST1512) · Month 2</div>
+ <h1>KSB Knowledge Check</h1>
+ <p>EPA-style scenario questions on Responsible AI, Ethics, Workforce Impact and Safe Practice</p>
+</header>
+<main id="app"></main>
+<script>
+const KSB = {
+ K1:"Organisational leadership in responsible AI adoption: values, policy, strategy, reputational risk, morale and sustainability.",
+ K2:"Legal, regulatory and ethical frameworks: employment rights, equality, GDPR, fairness, transparency and accountability.",
+ K3:"Social and economic impact of AI on different roles, particularly non-technical staff, including change management principles.",
+ K6:"Designing AI and automation that augments rather than replaces human work, where feasible.",
+ K10:"Sources of error and algorithmic bias: dataset choice, methodology, fairness metrics and mitigation.",
+ K26:"The benefits of wellbeing and safe working practices.",
+ K28:"Algorithmic impact assessment and workforce equality monitoring, identifying and mitigating disproportionate impacts.",
+ S2:"Follow ethical, responsible and safe working practices, respecting confidentiality and sensitive organisational matters.",
+ S13:"Support responsible implementation of AI aligned to organisational values, policies and user needs.",
+ S23:"Support others to use AI and automation safely and appropriately within organisational guidance.",
+ B:"Behaviours B1, B2, B5: accountability, responsibility, ethical awareness and safe professional practice."
+};
+const KSB_LABEL = {B:"B1, B2, B5"};
+const lab = k => KSB_LABEL[k]||k;
+
+/* type: mcq | ksb (identify KSB) | rag */
+const Q = [
+/* K1 */
+{k:"K1",type:"mcq",sc:"Your organisation's directors want every team to start using a public AI chatbot next week to 'save time'. There is no AI policy yet.",q:"What is the most responsible first action for leadership?",o:["Approve it and review any problems after six months","Set clear expectations through an AI policy, approved tools and accountable owners before rollout","Let each team decide for themselves which tools to use","Ban all AI use permanently"],a:1,ex:"Leaders set the expectations for safe AI use. A policy, approved tools and clear ownership align adoption with organisational values and strategy, and reduce reputational risk."},
+{k:"K1",type:"mcq",sc:"A competitor was in the news after its AI tool sent inaccurate and insensitive messages to customers.",q:"Which K1 element does this example best illustrate?",o:["Sustainability","Reputational risk","Employment rights","Prompt bias"],a:1,ex:"Irresponsible AI use can quickly damage trust in an organisation's brand. Reputational risk is one of the specific elements named in K1."},
+{k:"K1",type:"mcq",sc:"Staff morale has dropped since rumours spread that AI will be used to cut jobs.",q:"What should leadership do to protect morale and long-term sustainability?",o:["Say nothing until the project is finished","Communicate openly about the purpose of the AI, involve staff and explain how roles will be supported","Introduce the AI quietly in one team first without telling anyone","Offer bonuses to staff who stop asking questions"],a:1,ex:"Open communication and involvement build trust. K1 links leadership behaviour directly to staff morale and the sustainability of AI adoption."},
+/* K2 */
+{k:"K2",type:"mcq",sc:"Your team wants to use AI to automatically reject job applicants who score below a threshold, with no human involved.",q:"Which legal concern is most significant?",o:["Copyright law","UK GDPR rules on solely automated decisions that have a significant effect on individuals","The Computer Misuse Act","Health and Safety at Work Act"],a:1,ex:"Under UK GDPR, people have rights relating to solely automated decisions with legal or similarly significant effects, such as rejecting a job application. Keeping meaningful human review is a key safeguard."},
+{k:"K2",type:"mcq",sc:"An AI tool will summarise employee absence records for managers.",q:"Which step best supports UK GDPR compliance before going live?",o:["Carry out a Data Protection Impact Assessment (DPIA) and apply data minimisation","Ask the AI vendor if it is GDPR compliant and move on","Only use the tool on Fridays","Store the summaries on a personal laptop for security"],a:0,ex:"Absence records can include health data, which is special category data. A DPIA identifies risks, and data minimisation means only processing what is needed."},
+{k:"K2",type:"mcq",sc:"Learners receive feedback drafted by AI, but nobody tells them AI was involved.",q:"Which ethical principle is most at risk?",o:["Sustainability","Transparency","Efficiency","Scalability"],a:1,ex:"Transparency means being open about when and how AI is used, especially when it affects people. Telling users that AI is involved is part of responsible practice."},
+{k:"K2",type:"mcq",sc:"An AI recruitment tool produced a biased shortlist. The vendor blames the client, and the client blames the vendor.",q:"Which principle has broken down?",o:["Accountability","Accessibility","Automation","Augmentation"],a:0,ex:"Accountability means a named person or role is responsible for AI decisions and outcomes. It should be agreed before the system is used, not argued about afterwards."},
+/* K3 */
+{k:"K3",type:"mcq",sc:"An admin assistant with low digital confidence is anxious about a new AI tool that will draft her routine emails.",q:"Which response best reflects good change management?",o:["Tell her the tool is mandatory and she will pick it up","Explain why the change is happening, provide hands-on training and offer ongoing support","Give the work to a more technical colleague instead","Delay training until after the tool is live"],a:1,ex:"Change management models such as ADKAR focus on awareness, desire, knowledge, ability and reinforcement. Non-technical staff need a clear reason, training and support."},
+{k:"K3",type:"mcq",sc:"Automating data entry will save the HR team around 10 hours a week.",q:"Which statement describes an economic impact rather than a social impact?",o:["Staff feel worried about job security","The team can redirect time to higher-value work, improving productivity","Colleagues feel left out of the decision","Trust in managers falls"],a:1,ex:"Economic impact relates to productivity, cost and efficiency. Social impact relates to how people feel, their relationships, confidence and wellbeing. K3 asks you to explain both."},
+{k:"K3",type:"mcq",sc:"You are planning how to introduce an AI tool to a team of non-technical staff.",q:"Which of these is a recognised change management model you could apply?",o:["PEEL","Kotter's 8-Step Change Model","SWOT","GANTT"],a:1,ex:"Kotter's 8 steps, Lewin's Unfreeze-Change-Refreeze and ADKAR are all recognised change management models. PEEL is a writing structure, and SWOT is a strategic analysis tool."},
+/* K6 */
+{k:"K6",type:"mcq",sc:"Two designs are proposed for an AI that handles employee HR queries.",q:"Which design best augments rather than replaces human work?",o:["AI answers every query and closes the case automatically","AI drafts answers to routine queries for HR staff to review, and escalates complex or sensitive cases to a person","HR staff are removed from the process entirely","AI only answers queries outside working hours with no review"],a:1,ex:"Augmentation means AI handles routine work and supports people, while humans keep judgement over complex or sensitive matters."},
+{k:"K6",type:"mcq",sc:"A manager asks why the AI shouldn't simply make final performance ratings to save time.",q:"What is the strongest reason to keep a human in the loop?",o:["AI is always slower than people","Performance ratings affect people's careers and need context, empathy and accountable judgement","Humans never make mistakes","It is illegal to use AI in any HR process"],a:1,ex:"High-impact decisions about people need context and accountable human judgement. AI can support the process by summarising evidence, but should not replace the decision-maker."},
+/* K10 */
+{k:"K10",type:"mcq",sc:"An AI shortlisting tool was trained on ten years of past hiring decisions, when most hires were men.",q:"What type of bias is most likely?",o:["Data bias","Prompt bias","Confirmation of accuracy","Design neutrality"],a:0,ex:"If historical data reflects past inequality, the AI can learn and repeat it. Dataset choice is a key source of bias named in K10."},
+{k:"K10",type:"mcq",sc:"A user asks the AI: 'Explain why our new attendance policy is the best approach.'",q:"Which risk does this prompt create?",o:["Data bias","Prompt bias, because the question leads the AI towards one answer","Hallucination is impossible here","Algorithmic transparency"],a:1,ex:"Leading prompts push the AI towards a particular conclusion. A neutral prompt, such as 'What are the strengths and weaknesses of...', reduces prompt bias."},
+{k:"K10",type:"mcq",sc:"An AI tool gave a learner a confident answer quoting a regulation that does not exist.",q:"What is this called, and what is the best mitigation?",o:["Automation bias; switch the tool off","Hallucination; check outputs against reliable, authoritative sources before use","Data minimisation; delete the answer","Process bias; ask the AI again"],a:1,ex:"Hallucination is when AI generates false information that sounds convincing. Checking outputs against trusted sources and keeping human review are key mitigations."},
+{k:"K10",type:"mcq",sc:"Staff have started copying AI recommendations into reports without questioning them because 'the computer is objective'.",q:"Which risk does this describe?",o:["Automation bias: treating AI outputs as objective and correct","Data minimisation","Augmentation","Encryption failure"],a:0,ex:"Automation bias is over-trusting AI outputs. Training users to question and verify outputs is an important mitigation."},
+/* K26 */
+{k:"K26",type:"mcq",sc:"An AI monitoring tool tracks staff keystrokes and screen time to produce productivity scores.",q:"From a wellbeing perspective, what is the main risk?",o:["Staff may become too relaxed","Constant monitoring can increase stress, reduce trust and harm wellbeing","Productivity will definitely improve","There is no wellbeing risk if staff are told"],a:1,ex:"Excessive monitoring can create anxiety and damage trust. K26 asks you to explain why protecting wellbeing and safe working practices benefits both staff and the organisation."},
+{k:"K26",type:"mcq",sc:"You are explaining to leadership why wellbeing should be considered in AI projects.",q:"Which is the strongest benefit to give?",o:["It makes the project take longer","Staff who feel safe and supported are more engaged and productive, and more willing to adopt new tools","It is only a legal box-ticking exercise","It removes the need for training"],a:1,ex:"Good wellbeing and safe working practices support engagement, retention, productivity and smoother adoption of change."},
+/* K28 */
+{k:"K28",type:"mcq",sc:"After launch, an AI scheduling tool seems to give part-time staff fewer development opportunities.",q:"What should happen first?",o:["Ignore it unless someone complains","Investigate using outcome data broken down by group, then adjust the tool or process to mitigate the impact","Remove part-time staff from the system","Wait until the annual review"],a:1,ex:"Workforce equality monitoring means comparing outcomes across groups, identifying disproportionate impact and taking action to fix it."},
+{k:"K28",type:"mcq",sc:"You need to show that your AI tool treats different groups fairly over time.",q:"What evidence would be most useful?",o:["A statement from the vendor that the tool is fair","Regular monitoring reports comparing outcomes across groups, such as protected characteristics, accessibility needs and working patterns","The number of times the tool was used","Staff satisfaction with the tool's colours"],a:1,ex:"Fairness has to be evidenced with outcome data compared across groups, reviewed regularly, with actions recorded."},
+{k:"K28",type:"mcq",sc:"You are listing groups to consider in your algorithmic impact assessment.",q:"Under the Equality Act 2010, how many protected characteristics are there?",o:["5","7","9","12"],a:2,ex:"There are nine: age, disability, gender reassignment, marriage and civil partnership, pregnancy and maternity, race, religion or belief, sex, and sexual orientation."},
+/* S2 */
+{k:"S2",type:"mcq",sc:"You want to test whether an AI tool can summarise HR case notes.",q:"Which approach follows safe working practice?",o:["Paste in real case notes to get realistic results","Use dummy or anonymised data in an approved tool, in line with your AI and data protection policies","Use your personal AI account so work systems are not affected","Email the case notes to yourself first"],a:1,ex:"Safe exploration uses dummy or anonymised data and approved tools only. This respects confidentiality and organisational policy, which is S2."},
+{k:"S2",type:"mcq",sc:"A colleague asks you to run a confidential restructuring plan through a free online AI tool to 'tidy up the wording'.",q:"What should you do?",o:["Do it quickly and delete the chat afterwards","Decline, explain the confidentiality risk, and suggest an approved tool or a non-confidential version","Do it but remove the company name","Ask a different colleague to do it"],a:1,ex:"Confidential and sensitive organisational information must not go into unapproved tools. Explaining why and offering a safe alternative shows S2 and good professional behaviour."},
+/* S13 */
+{k:"S13",type:"mcq",sc:"Your organisation's values include 'fairness to every client'. You are proposing an AI tool for client communications.",q:"How do you best show S13 in your report?",o:["State that the tool is fair","Show where the value appears in your AI policy, explain how your design meets it, and include the policy extract as evidence","Copy the full policy into the report","Leave values out because they are not technical"],a:1,ex:"S13 is about showing that implementation aligns with your organisation's actual values, policies and user needs, with evidence."},
+{k:"S13",type:"mcq",sc:"You are planning the rollout of an approved AI tool.",q:"Which plan best supports responsible implementation?",o:["Turn it on for everyone at once","Pilot with a small group, gather user feedback, check it against policy, then roll out with guidance","Let the vendor decide how it is used","Roll out first and write a policy later"],a:1,ex:"A pilot, user feedback and policy checks make sure the tool meets user needs and organisational requirements before wider use."},
+/* S23 */
+{k:"S23",type:"mcq",sc:"Several non-technical colleagues are unsure how to use the approved AI tool safely.",q:"Which action best demonstrates S23?",o:["Tell them to watch online videos","Create a short guide or process map on safe use within organisational guidance, and walk them through it","Use the tool on their behalf permanently","Report them to their manager"],a:1,ex:"S23 is about supporting others to use AI safely and appropriately. A practical guide, plus support, is strong evidence."},
+{k:"S23",type:"mcq",sc:"A colleague shows you an AI-generated policy summary they plan to send to all staff.",q:"How do you support them appropriately?",o:["Send it for them","Help them check it against the original policy for accuracy, and remind them to note that AI was used if guidance requires it","Tell them AI summaries are always accurate","Ignore it, as it is not your job"],a:1,ex:"Supporting others includes helping them verify AI outputs and follow organisational guidance on transparency."},
+/* B */
+{k:"B",type:"mcq",sc:"You realise an AI-generated report you sent last week contained an error that affected a decision.",q:"Which response shows the right professional behaviours?",o:["Say nothing and hope nobody notices","Take ownership, tell the relevant people promptly, correct the error and improve your checking process","Blame the AI tool","Delete the report"],a:1,ex:"Accountability, responsibility and ethical awareness (B1, B2, B5) mean owning mistakes, being open and improving practice."},
+/* Identify-the-KSB */
+{k:"K6",type:"ksb",sc:"\"Our chatbot drafts responses, but an advisor always reviews and sends them, so staff spend more time on complex cases.\"",q:"Which KSB does this statement best evidence?",o:["K6","K28","S2","K1"],a:0,ex:"Designing AI to support people and free them for higher-value work, while keeping humans involved, is augmentation (K6)."},
+{k:"K28",type:"ksb",sc:"\"Each quarter we compare outcomes by age, disability and working pattern to check no group is disadvantaged.\"",q:"Which KSB does this statement best evidence?",o:["K3","K10","K28","S13"],a:2,ex:"Regularly comparing outcomes across groups to identify and address disproportionate impact is workforce equality monitoring (K28)."},
+{k:"S2",type:"ksb",sc:"\"I tested the prompt using dummy learner records in the approved enterprise tool, not real data.\"",q:"Which KSB does this statement best evidence?",o:["K26","S2","K2","S23"],a:1,ex:"Using dummy data in an approved tool shows ethical, safe working practice that respects confidentiality (S2)."},
+{k:"K3",type:"ksb",sc:"\"I used the ADKAR model to plan how we would introduce the tool to admin staff with low digital confidence.\"",q:"Which KSB does this statement best evidence?",o:["K3","K1","K10","S13"],a:0,ex:"Applying change management principles to the impact on non-technical staff is K3."},
+{k:"K10",type:"ksb",sc:"\"We rewrote leading prompts as neutral questions and checked outputs against the source policy to reduce bias and hallucination.\"",q:"Which KSB does this statement best evidence?",o:["K28","K6","K10","K2"],a:2,ex:"Identifying sources of error and bias, and applying mitigation approaches, is K10."},
+/* RAG */
+{k:"S13",type:"rag",sc:"Risk: staff paste personal data into the AI tool. Likelihood 3 (likely), Severity 3 (major).",q:"What RAG rating should this risk receive?",a:2,ex:"3 × 3 = 9, which is Red (6 to 9). Do not proceed without review, stronger controls or a different approach."},
+{k:"S2",type:"rag",sc:"Risk: AI-generated meeting notes contain minor formatting errors. Likelihood 2, Severity 1.",q:"What RAG rating should this risk receive?",a:0,ex:"2 × 1 = 2, which is Green (1 to 2). Monitor through normal controls."},
+{k:"S23",type:"rag",sc:"Risk: non-technical users misunderstand AI outputs. Likelihood 2, Severity 2.",q:"What RAG rating should this risk receive?",a:1,ex:"2 × 2 = 4, which is Amber (3 to 4). Add safeguards, such as user guidance and human review, before use."},
+{k:"S13",type:"mcq",sc:"In your risk register, one mitigation reads: 'Check it carefully.'",q:"Which is the best replacement?",o:["Check it very carefully","Be more careful in future","A named HR adviser reviews every AI draft against the current policy before it is sent, and the review is logged","Monitor the situation"],a:2,ex:"Mitigations must be specific: who does what, when and how. Vague controls will not meet the criteria."}
+];
+const RAG = [["Green","#2E8B57"],["Amber","#D98E04"],["Red","#C0392B"]];
+
+const shuffle = a => { a=a.slice(); for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; };
+const esc = s => String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const app = document.getElementById("app");
+const TRAINER = "dave@we-are-zenith.com";
+let S = {name:"", mode:"full", qs:[], i:0, ans:[], picked:null, locked:false, focus:null};
+
+function prep(q){
+ if(q.type==="rag") return {...q, opts:[0,1,2].map(n=>({t:RAG[n][0],n})), correct:q.a};
+ const idx = shuffle(q.o.map((t,n)=>({t,n})));
+ return {...q, opts:idx, correct:q.a};
+}
+function start(){
+ let pool = Q;
+ if(S.mode==="quick") pool = shuffle(Q).slice(0,12);
+ if(S.mode==="focus" && S.focus) pool = Q.filter(q=>S.focus.includes(q.k));
+ S.qs = shuffle(pool).map(prep); S.i=0; S.ans=[]; S.picked=null; S.locked=false;
+ render();
+}
+function home(){
+ app.innerHTML = `<div class="card">
+  <h2>Test your knowledge of the Month 2 KSBs</h2>
+  <p class="muted">The questions are written in the style of an End-Point Assessment: short workplace scenarios where you choose the most appropriate professional response. You will get feedback after every answer and a breakdown by KSB at the end.</p>
+  <div class="modes">
+   <button class="mode ${S.mode==="full"?"on":""}" data-mode="full"><b>Full assessment</b><span class="muted">All ${Q.length} questions</span></button>
+   <button class="mode ${S.mode==="quick"?"on":""}" data-mode="quick"><b>Quick check</b><span class="muted">12 random questions</span></button>
+  </div>
+  <div style="margin-top:16px"><label for="nm" style="font-weight:600;display:block;margin-bottom:4px">Your full name</label><input id="nm" value="${esc(S.name)}" placeholder="So your trainer knows whose results these are" style="width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:9px;font:inherit"></div>
+  <div class="row"><button class="btn" id="go">Start quiz</button></div>
+ </div>
+ <div class="card"><b>KSBs covered</b><table style="margin-top:8px">${Object.entries(KSB).map(([k,v])=>`<tr><td style="width:100px"><span class="tag ksb">${lab(k)}</span></td><td>${esc(v)}</td></tr>`).join("")}</table></div>`;
+}
+function render(){
+ const q = S.qs[S.i], n = S.qs.length;
+ const typeLabel = q.type==="ksb"?"Identify the KSB":q.type==="rag"?"RAG rating":"Scenario";
+ const letters = "ABCD";
+ const optsHtml = q.type==="rag"
+  ? `<div class="opts rags">${q.opts.map(o=>`<button class="opt rag" style="background:${RAG[o.n][1]}" data-n="${o.n}">${o.t}</button>`).join("")}</div>`
+  : `<div class="opts">${q.opts.map((o,j)=>`<button class="opt" data-n="${o.n}"><span class="l">${letters[j]}</span><span>${esc(o.t)}</span></button>`).join("")}</div>`;
+ app.innerHTML = `<div class="card">
+  <div class="topbar"><span>Question ${S.i+1} of ${n}</span><span>Score: ${S.ans.filter(a=>a.ok).length}</span></div>
+  <div class="bar"><span style="width:${(S.i)/n*100}%"></span></div>
+  <div style="margin-top:12px"><span class="tag">${typeLabel}</span><span class="tag ksb" title="${esc(KSB[q.k])}">${lab(q.k)}</span></div>
+  <div class="scenario">${esc(q.sc)}</div>
+  <div class="q">${esc(q.q)}</div>
+  ${optsHtml}
+  <div class="feedback" id="fb"></div>
+  <div class="row"><button class="btn" id="check" disabled>Check answer</button><button class="btn" id="next" style="display:none">${S.i+1<n?"Next question":"See results"}</button><button class="btn ghost" id="quit">Quit</button></div>
+ </div>`;
+}
+function check(){
+ const q=S.qs[S.i], ok = S.picked===q.correct; S.locked=true;
+ S.ans.push({k:q.k, ok, q});
+ document.querySelectorAll(".opt").forEach(b=>{ const n=+b.dataset.n; b.disabled=true;
+  if(q.type!=="rag"){ if(n===q.correct) b.classList.add("right"); else if(n===S.picked) b.classList.add("wrong"); }
+  else { b.style.opacity = (n===q.correct||n===S.picked)?1:.35; if(n===S.picked&&!ok) b.style.outline="3px solid #1d2433"; }
+ });
+ const correctText = q.type==="rag"?RAG[q.correct][0]:q.o[q.correct];
+ const fb=document.getElementById("fb"); fb.className="feedback "+(ok?"ok":"no");
+ fb.innerHTML = `<b>${ok?"Correct.":"Not quite. The best answer is: "+esc(correctText)}</b>${esc(q.ex)}<div class="muted" style="margin-top:6px;font-size:13px">Links to ${lab(q.k)}: ${esc(KSB[q.k])}</div>`;
+ document.getElementById("check").style.display="none"; document.getElementById("next").style.display="inline-block";
+}
+function resultText(c,n,pct,band,order,by){
+ const d=new Date().toLocaleString("en-GB",{dateStyle:"long",timeStyle:"short"});
+ const mode=S.mode==="quick"?"Quick check (12 questions)":S.mode==="focus"?"Retry of weaker KSBs":"Full assessment";
+ return ["Month 2 KSB Knowledge Check: results","","Learner: "+S.name,"Date: "+d,"Mode: "+mode,"Score: "+c+" / "+n+" ("+pct+"%), "+band,"","Results by KSB:"].concat(order.map(k=>"- "+lab(k)+": "+by[k].c+" / "+by[k].t)).join("\n");
+}
+function mailLink(c,n,pct,band,order,by){
+ return "mailto:"+TRAINER+"?subject="+encodeURIComponent("Month 2 KSB quiz results: "+S.name+" ("+pct+"%)")+"&body="+encodeURIComponent(resultText(c,n,pct,band,order,by));
+}
+function results(){
+ const n=S.ans.length, c=S.ans.filter(a=>a.ok).length, pct=Math.round(c/n*100);
+ const by={}; S.ans.forEach(a=>{by[a.k]=by[a.k]||{c:0,t:0}; by[a.k].t++; if(a.ok) by[a.k].c++;});
+ const order=Object.keys(KSB).filter(k=>by[k]);
+ const weak=order.filter(k=>by[k].c/by[k].t<0.7);
+ const band = pct>=85?["Distinction standard","Excellent understanding across the KSBs."]:pct>=70?["Pass standard","Solid understanding. Review the KSBs below that need work."]:["Keep revising","Use the guide to revisit the KSBs below, then try again."];
+ const col = r => r>=0.85?"#2E8B57":r>=0.7?"#D98E04":"#C0392B";
+ app.innerHTML = `<div class="card" style="text-align:center">
+  <div class="muted">Your score</div><div class="score">${c} / ${n}</div><div style="font-size:18px;font-weight:600;color:var(--navy)">${pct}% · ${band[0]}</div><p class="muted">${band[1]}</p>
+  <p class="muted" style="font-size:12px">This is a practice check, not an official grade.</p>
+ </div>
+ <div class="card"><b>Results by KSB</b>
+  <table style="margin-top:10px"><tr><th>KSB</th><th>Score</th><th style="width:40%"></th></tr>${order.map(k=>{const r=by[k].c/by[k].t;return `<tr><td><span class="tag ksb">${lab(k)}</span></td><td>${by[k].c} / ${by[k].t}</td><td><div class="mini"><span style="width:${r*100}%;background:${col(r)}"></span></div></td></tr>`}).join("")}</table>
+  <div class="row">${weak.length?`<button class="btn" id="focus">Retry weaker KSBs (${weak.map(lab).join(", ")})</button>`:""}<button class="btn ${weak.length?"ghost":""}" id="again">Try again</button><button class="btn ghost" id="home">Back to start</button></div>
+ </div>
+ <div class="card"><b>Send your results to your trainer</b>
+  <p class="muted" style="margin:6px 0 0">This opens your email app with your results filled in, addressed to <b>${TRAINER}</b>. Check it and press Send.</p>
+  <div class="row"><a class="btn" id="mail" href="${mailLink(c,n,pct,band[0],order,by)}">Email my results</a><button class="btn ghost" id="copyRes">Copy results</button></div>
+  <p class="muted" style="font-size:13px;margin-top:10px">If no email app opens, click Copy results and paste them into an email to ${TRAINER}.</p>
+ </div>
+ ${S.ans.some(a=>!a.ok)?`<div class="card"><b>Review the questions you missed</b>${S.ans.filter(a=>!a.ok).map(a=>`<div class="review"><span class="tag ksb">${lab(a.k)}</span> ${esc(a.q.q)}<br><span class="muted">${esc(a.q.sc)}</span><br><b>Answer:</b> ${esc(a.q.type==="rag"?RAG[a.q.correct][0]:a.q.o[a.q.correct])}. ${esc(a.q.ex)}</div>`).join("")}</div>`:""}`;
+ S.focus = weak; S.last=resultText(c,n,pct,band[0],order,by);
+}
+app.addEventListener("click",e=>{
+ const m=e.target.closest("[data-mode]"); if(m){S.mode=m.dataset.mode; home(); return;}
+ if(e.target.id==="go"){ const v=(document.getElementById("nm")||{}).value||""; S.name=v.trim(); if(!S.name){ document.getElementById("nm").style.borderColor="#C0392B"; document.getElementById("nm").focus(); return; } start(); return; }
+ const o=e.target.closest(".opt"); if(o&&!S.locked){ S.picked=+o.dataset.n; document.querySelectorAll(".opt").forEach(b=>{b.classList.toggle("sel",b===o); if(b.classList.contains("rag")) b.style.outline = b===o?"3px solid #1d2433":"none";}); document.getElementById("check").disabled=false; return; }
+ if(e.target.id==="check"){ check(); return; }
+ if(e.target.id==="copyRes"){ const b=e.target; (navigator.clipboard?navigator.clipboard.writeText(S.last):Promise.reject()).then(()=>{b.textContent="Copied";setTimeout(()=>b.textContent="Copy results",2000)}).catch(()=>{b.textContent="Copy blocked: select and copy manually"}); return; }
+ if(e.target.id==="next"){ S.i++; S.picked=null; S.locked=false; if(S.i<S.qs.length) render(); else results(); window.scrollTo(0,0); return; }
+ if(e.target.id==="quit"||e.target.id==="home"){ S.mode=S.mode==="focus"?"full":S.mode; home(); return; }
+ if(e.target.id==="again"){ if(S.mode==="focus") S.mode="full"; start(); return; }
+ if(e.target.id==="focus"){ S.mode="focus"; start(); return; }
+});
+home();
+</script>
+</body>
+</html>
